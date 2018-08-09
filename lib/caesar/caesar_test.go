@@ -1,10 +1,13 @@
-package main
+package caesar
 
-import "testing"
+import (
+	caesar "ClassicCiphers/lib/caesar"
+	"testing"
+)
 
 func TestEncrypt(t *testing.T) {
 	message := "Test message to check the code"
-	encryptMessage := encryptCaesar(message, 5)
+	encryptMessage := caesar.EncryptCaesar(message, 5)
 	if len(message) != len(encryptMessage) {
 		t.Log("Incorrect encryption!")
 		t.Fail()
@@ -14,7 +17,7 @@ func TestEncrypt(t *testing.T) {
 func TestDecrypt(t *testing.T) {
 	message := "yjxy rjxxflj yt hmjhp ymj htij"
 	originalMessage := "test message to check the code"
-	decryptMessage := decryptCaesar(message, 5)
+	decryptMessage := caesar.DecryptCaesar(message, 5)
 	if decryptMessage != originalMessage {
 		t.Fail()
 	}
@@ -23,8 +26,8 @@ func TestDecrypt(t *testing.T) {
 func TestBruteForceAttack(t *testing.T) {
 	originalMessage := "test message to check the code"
 	rotateNumber := 15
-	cryptMessage := encryptCaesar(originalMessage, rotateNumber)
-	hackedNumber := bruteForceAttack(cryptMessage)
+	cryptMessage := caesar.EncryptCaesar(originalMessage, rotateNumber)
+	hackedNumber := caesar.BruteForceAttack(cryptMessage)
 	if rotateNumber != hackedNumber {
 		t.Fail()
 	}

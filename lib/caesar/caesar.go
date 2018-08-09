@@ -1,13 +1,12 @@
-package main
+package caesar
 
 import (
-	"fmt"
 	"strings"
 )
 
 const alphabet = "abcdefghijklmnopqrstuvwxyz"
 
-func encryptCaesar(message string, rotateNumber int) string {
+func EncryptCaesar(message string, rotateNumber int) string {
 	formatMessage := strings.ToLower(message)
 	messageArray := []byte(formatMessage)
 	for pos, char := range messageArray {
@@ -19,7 +18,7 @@ func encryptCaesar(message string, rotateNumber int) string {
 	return string(messageArray)
 }
 
-func decryptCaesar(message string, rotateNumber int) string {
+func DecryptCaesar(message string, rotateNumber int) string {
 	formatMessage := strings.ToLower(message)
 	messageArray := []byte(formatMessage)
 	for pos, char := range messageArray {
@@ -61,7 +60,7 @@ func getMaxKeyValue(frecuencies map[string]float32) string {
 	return maxKey
 }
 
-func bruteForceAttack(message string) int {
+func BruteForceAttack(message string) int {
 	frecuenciesCipherText := stadisticAnalysis(message)
 	letterHighSize := getMaxKeyValue(frecuenciesCipherText)
 	alphabetArray := []byte(alphabet)
@@ -77,12 +76,4 @@ func bruteForceAttack(message string) int {
 	}
 	answer := (posLetterHighSize - posELetter) % len(alphabet)
 	return answer
-}
-
-func main() {
-	message := "Secret message"
-	encryptMessage := encryptCaesar(message, 5)
-	fmt.Println(encryptMessage)
-	rotateNumber := bruteForceAttack(encryptMessage)
-	fmt.Println(rotateNumber)
 }
